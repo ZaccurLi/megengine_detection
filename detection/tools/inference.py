@@ -49,6 +49,9 @@ def main():
     evaluator = DetEvaluator(model)
 
     ori_img = cv2.imread(args.image)
+    if ori_img is None:
+        print(f"Error : {args.image} cannot be read")
+        exit()
     image, im_info = DetEvaluator.process_inputs(
         ori_img.copy(), model.cfg.test_image_short_size, model.cfg.test_image_max_size,
     )
@@ -62,7 +65,8 @@ def main():
         is_show_label=True,
         classes=data_mapper[cfg.test_dataset["name"]].class_names,
     )
-    cv2.imwrite("results.jpg", res_img)
+    cv2.imwrite("result.jpg", res_img)
+    print("[inference done] write result.jpg")
 
 
 if __name__ == "__main__":

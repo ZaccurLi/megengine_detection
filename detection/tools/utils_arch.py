@@ -241,6 +241,7 @@ class DetEvaluator:
         box_cls, box_delta = self.pred_func(**inputs)
         # box_cls, box_delta = self.model(**inputs)
         box_cls, box_delta = box_cls.numpy(), box_delta.numpy()
+        # print(box_cls, box_delta)
         dtboxes_all = list()
         all_inds = np.where(box_cls > self.model.cfg.test_cls_threshold)
 
@@ -281,7 +282,7 @@ class DetEvaluator:
         all_results = []
         for record in results:
             image_filename = record["image_id"]
-            boxes = record["pred_boxes"]
+            boxes = record["det_res"]
             if len(boxes) <= 0:
                 continue
             boxes[:, 2:4] = boxes[:, 2:4] - boxes[:, 0:2]
@@ -295,7 +296,7 @@ class DetEvaluator:
                         dataset_class.class_names[int(box[5])]
                     ]
                 else:
-                    elem["category_id"] = int(box[5]) + 1
+                    elem["category_id"] = int(box[5]) # + 1
                 all_results.append(elem)
         return all_results
 
@@ -319,8 +320,6 @@ class DetEvaluator:
                 cls_id = int(det[5])
                 score = det[4]
 
-                # since "cls_id=0" is background of the arch image in default, 
-                # the result cannot be visualized, which should be commented
                 # if cls_id == 0:
                 #     continue
                 if score > thresh:
