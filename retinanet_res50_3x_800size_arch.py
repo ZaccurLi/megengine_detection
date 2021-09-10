@@ -31,3 +31,5 @@ class CustomRetinaNetConfig(models.RetinaNetConfig):
 
 Net = models.RetinaNet
 Cfg = CustomRetinaNetConfig
+print(__file__)
+print("config done")

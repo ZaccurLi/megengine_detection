@@ -11,6 +11,7 @@ from detection.tools.dataset_arch import CustomerDataSetArch
 
 data_mapper = dict(
     coco=COCO,
+    cocomini=COCO,
     objects365=Objects365,
     voc=PascalVOC,
     arch=CustomerDataSetArch,

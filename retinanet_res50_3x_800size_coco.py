@@ -27,7 +27,7 @@ class CustomRetinaNetConfig(models.RetinaNetConfig):
         self.warm_iters = 100
         self.log_interval = 10
 
-print(__file__)
-print("version", sys.version)
 Net = models.RetinaNet
 Cfg = CustomRetinaNetConfig
+print(__file__)
+print("config done")
